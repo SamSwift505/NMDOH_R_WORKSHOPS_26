@@ -120,3 +120,9 @@ names(data_week_1)
 
 # Look I can get a 5 number summary
 summary(data_week_1$Flu_18_per)
+
+
+
+# HOMEWORK: GET YOUR DATA INTO R, TELL ME HOW MANY OBS AND VARIABLES, 
+
+# AND MAYBE CHALLENGE YOURSELF WITH VARIABLE TYPES
