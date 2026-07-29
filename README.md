@@ -5,4 +5,4 @@ Welcome! Click the green
 
 | Week / Module | Slides (PDF) | SAS data | STATA data | CSV | Code|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Week 1** | [Download Slides](Week_1/Workshop_1.pdf) | [SAS](Week_1/Week_1_data.sas7bdat) | [STATA](Week_1/Week_1_data.dat) | [CSV ](Week_1/Week_1_data.csv) |  [Code](Week_1/Workshop_1.R) | 
+| **Week 1** | [Download Slides](Week_1/Workshop_1.pdf) | [SAS data](Week_1/Week_1_data.sas7bdat) | [STATA data](Week_1/Week_1_data.dat) | [CSV data](Week_1/Week_1_data.csv) |  [Code](Week_1/Workshop_1.R) | 
