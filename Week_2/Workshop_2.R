@@ -31,7 +31,7 @@ library(tidyverse)
 # Remember- the thing we want to change is the filepath to where you saved the data
 
 # like this change the ALL CAPS PART
-# data<-read.csv("C:/YOUR_FOLDER/YOUR_SUB_FOLDER/names_n_dx.csv")
+# data<-read.csv("C:/YOUR_FOLDER/YOUR_SUB_FOLDER/Workshop_2_data.csv")
 
 #Read in the data with read.csv
 
