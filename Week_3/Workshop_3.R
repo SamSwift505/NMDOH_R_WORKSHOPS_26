@@ -7,7 +7,7 @@
 
 # Here are things this program does
 # 1. Read in not one, but TWO datasets!
-# 2. Review removing duplicates and capatalizing names
+# 2. Review removing duplicates and capitalizing names
 # 3. Match (join in R) 
 # 4. Tell us who didnt match (anti join)
 # 5. fun with subsetting
@@ -56,9 +56,17 @@ colors_holidays2<-unique(colors_holidays)
 # Notice that to refer to a variable within a dataset we use the syntax: dataset$variable
 #not makeing new datasets here 
 data2$name<-toupper(data2$name)
+#data2$name2<-toupper(data2$name)
 colors_holidays2$name<-toupper(colors_holidays2$name)
 
 ## Now the names are capitalized so we can match them! 
+
+
+
+##Sam creates some indicatro variables to know which datasets people cam from
+data2$in_data2<-1
+colors_holidays2$in_ch<-1
+
 
 
 # 3. Lets match (or join as it is called in SQL)##########################################################
@@ -81,7 +89,16 @@ both_inner_2<-inner_join(data2,colors_holidays2, by = c("name" = "name", "birthd
 both_left<-left_join(data2,colors_holidays2, by = c("name" = "name", "birthdate" = "birthdate"))
 #n=25
 
-###Your practice-- Try to understand why these data sets are different numberse?
+#left joining keeps all (including not match) in first dataset
+both_right<-right_join(data2,colors_holidays2, by = c("name" = "name", "birthdate" = "birthdate"))
+#n=22
+
+
+not_match<-subset(both_left, is.na(in_ch))
+
+
+
+###Your practice-- Try to understand why these data sets are different numbers?
 
 
 
@@ -104,6 +121,7 @@ not_match<-anti_join(data2,colors_holidays2, by = c("name" = "name", "birthdate"
 ## lets make a very simple new dataset of only people who like earth day
 earth_day<-subset(both_inner_2, Favorite_holiday=="earth day")
 
+table(earth_day$Favorite_holiday)
 
 
 
@@ -116,10 +134,12 @@ earth_day<-subset(both_inner_2, Favorite_holiday=="earth day")
 
 
 ###Homework challenge questions
-##1. Create a dataset of people who live in santa fe from the ORIGINAL data2 dataset
-##2. Left or inner join those data with the favorite colors and holidays data (hopefully same answer)
-##3. What is the most popular color of people who live in santa fe? 
-##4. I will show a solution next week 
+## 1. Create a dataset of people who live in santa fe from the ORIGINAL data2 dataset
+## 2. Left or inner join those data with the favorite colors and holidays data (hopefully same answer)
+## 3. What is the most popular color of people who live in santa fe? 
+## 3.5 Review aggregate function- is there a difference in  egfr means across categories of GLP1 for people in SF?
+## 3.5 will only be in santa fe dataset 
+## 4. I will show a solution next week 
 
 
 
@@ -142,6 +162,7 @@ library(lubridate)
 both_inner_2$visit_date <- as.Date(both_inner_2$visit_date, format = "%m/%d/%Y")
 both_inner_2$birthdate <- as.Date(both_inner_2$birthdate, format = "%m/%d/%Y")
 
+##Other functions like this are as.number, as.factor, as.character
 
 both_inner_2$age <- time_length(interval(both_inner_2$birthdate, both_inner_2$visit_date), "years")
 
