@@ -1,0 +1,115 @@
+---
+title: "Life Expectancy in the United States, Japan, and Australia, 2018-2024"
+format: docx
+editor: visual
+filters: 
+  - flextable-qmd
+  - at: post-render
+    path: _extensions/flextable-qmd/unwrap-float.lua
+---
+
+**Introduction**
+
+As seen in **Figure 1** and **Table 1**, the United States had lower life expectancy than Japan and Australia from 2018 to 2024 (1). Recent research attributes stagnating life expectancy in the United States to several different causes of death, including increasing early life mortality from external causes (2), as well as stagnating gains in cardiovascular disease mortality in midlife (3).
+
+```{r}
+#| echo: false
+#| include: false
+library(haven) #reads in data
+library(tidyverse) #manipulates data 
+#install.packages("flextable")
+library(flextable)
+
+```
+
+```{r}
+#| echo: false
+#| include: false
+##Here I the solution to last week
+life_ex<-read.csv("C:/Users/samswift/Dropbox/NMPHANMDOH/NMDOH/Workshops/Week_4/Workshop_4_data.csv")
+life_ex2<-subset(life_ex, Year>2017)
+life_ex3<- subset(life_ex2, select=c(Year,Japan,Australia,United_States))
+
+life_ex_long<-life_ex2 %>% #the pipe says do this next
+  pivot_longer(                          #pivot longer is the transpose function 
+    cols = c(Japan,Australia,United_States), # The columns you want to collapse
+    names_to = "Country",  # The name of the new column for old headers
+    values_to = "Life_ex") # The name of the new column for cell values
+
+
+
+##ggplotting in iterations 
+
+##Here I use fill=country to tell it there is a third category 
+pline<- ggplot(life_ex_long, aes(x=Year, y=Life_ex, fill=Country)) + 
+  geom_line(stat='identity')
+pline 
+##THAT GRAPH IS NO GOOD BECAUSE I DON'T KNOW WHICH IS WHICH 
+
+#If I change fill to color the colors of the lines change
+##NOTE this automatically generates a legend: you can turn that off
+pline<- ggplot(life_ex_long, aes(x=Year, y=Life_ex, color=Country)) + 
+  geom_line(stat='identity')
+pline 
+
+##Ok looks pretty bad lets do some simple cleaning
+
+## fix the legend lables and manually set the colors
+pline<- pline+   scale_color_manual(
+  values = c("black", "blue", "red"), #make the thing you want to emphasize red? is that lying with statistics? 
+  labels = c("Australia","Japan", "United States")
+)
+pline 
+
+##Change legend position 
+pline<- pline + theme(legend.position = "bottom")
+pline
+
+##Remove background "chart junk" 
+pline<- pline + theme( 
+  panel.background = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank())
+pline
+
+### add a title, and a y label 
+pline<-pline + labs(title = stringr::str_wrap("Figure 1. Life expectancy from birth in the US vs Japan and Australia, 2018-2024", width = 75), 
+                    y= "Life expectancy") +  coord_cartesian(clip = "off")
+pline
+
+```
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 4.2
+
+#Here is a block where I only supress the output
+#This will add the graph to the report 
+pline
+```
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| label: tbl-life-exp
+#| tbl-cap: "Table 1. Life Expectancy 2018-2024, Select Countries"
+
+
+table <- life_ex3
+ft <- flextable(table)
+
+# Format the year column
+ft <- colformat_int(ft, j = "Year", big.mark = "")
+
+# Print the final flextable
+ft
+
+```
+
+**References**
+
+1.  Rakshit, S., Cotter, L., & McGough, M. (2026, March 31). *How does U.S. life expectancy compare to other countries?*. Peterson-KFF Health System Tracker. https://www.healthsystemtracker.org/chart-collection/u-s-life-expectancy-compare-countries/
+2.  Dwyer-Lindgren L, Baumann M, Li Z et al. Ten Americas: a systematic analysis of life expectancy disparities in the USA. The Lancet, 2024; 404, 2299-2313
+3.  Abrams L, Brower N, Myrskylä M, Mehta N. Pervasive stagnation: flat and increasing cardiovascular disease mortality rates after 2010 across US states and counties. Am J Epidemiol. 2025 Aug 5;194(8):2261-2269. doi: 10.1093/aje/kwae414. PMID: 39449565; PMCID: PMC12342862.
