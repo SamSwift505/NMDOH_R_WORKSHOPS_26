@@ -9,4 +9,4 @@ Welcome! Click the green
 | **Week 2** | [Download Slides](Week_2/Workshop_2.pptx) | N/A | N/A | [CSV data](Week_2/Workshop_2_data.csv) |  [Code](Week_2/Workshop_2.R) | 
 | **Week 3** | [Download Slides](Week_3/Workshop_3.pptx) | N/A | N/A | [CSV data](Week_3/Workshop_3_data.csv) |  [Code](Week_3/Workshop_3.R) | 
 | **Week 4** | [Download Slides](Week_4/Workshop_4.pptx) | N/A | N/A | [CSV data](Week_4/Workshop_4_data.csv) |  [Code](Week_4/Workshop_4.R) | 
-| **Week 4** | [Download Slides](Week_5/Week_5.pptx) | N/A | N/A | [CSV data](Week_4/Workshop_4_data.csv) |  [Quarto code](Week_5/Workshop_5.qmd) [loop code](Week_5/Workshop_5_loops.qmd)| 
+| **Week 5** | [Download Slides](Week_5/Week_5.pptx) | N/A | N/A | [CSV data](Week_4/Workshop_4_data.csv) |  [Quarto code](Week_5/Workshop_5.qmd) [loop code](Week_5/Workshop_5_loops.qmd)| 
